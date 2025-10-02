@@ -20,15 +20,15 @@ function App() {
     return response.json();
   }
   
-  async function getProfile() {
-    const response = await fetch('/auth/api/v1/login', {
-      method: 'GET',
-      // credentials: 'include',
-    });
+  // async function getProfile() {
+  //   const response = await fetch('/auth/api/v1/login', {
+  //     method: 'GET',
+  //     // credentials: 'include',
+  //   });
   
-    if (!response.ok) throw new Error('Failed to load profile');
-    return response.json();
-  }
+  //   if (!response.ok) throw new Error('Failed to load profile');
+  //   return response.json();
+  // }
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
