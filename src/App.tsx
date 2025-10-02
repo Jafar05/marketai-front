@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
   async function login(email: string, password: string) {
-    const response = await fetch('/auth/api/v1/register', {
+      const response = await fetch('/api/auth/api/v1/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // если нужны cookie-сессии:
