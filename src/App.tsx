@@ -3,13 +3,13 @@ import { useCallback } from 'react';
 import './App.css'
 
 function App() {
-  async function login(email: string, password: string) {
+  async function login(email: string, password: string, phoneNumber: string) {
       const response = await fetch('/api/auth/api/v1/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // если нужны cookie-сессии:
       // credentials: 'include',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, phoneNumber }),
     });
   
     if (!response.ok) {
@@ -32,6 +32,7 @@ function App() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -40,12 +41,19 @@ function App() {
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   }, [])
+
+  const onChangePhoneNumber = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(e.target.value);
+  }, [])
+
+
   return (
     <>
       <div>
         <input type="email" placeholder="Email" onChange={onChangeEmail}/>
         <input type="password" placeholder="Password"  onChange={onChangePassword}/>
-        <button onClick={() => login(email, password)}>Login</button>
+        <input type="phone" placeholder="phoneNumber"  onChange={onChangePhoneNumber}/>
+        <button onClick={() => login(email, password, phoneNumber)}>Login</button>
         {/* <button onClick={() => getProfile()}>Get Profile</button> */}
       </div>
     </>
