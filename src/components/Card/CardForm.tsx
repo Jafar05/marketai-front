@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import styles from "./CardForm.module.css";
 import { Card, Button, Form, Input, message, Select, Space, Tag, Upload } from "antd";
 import type { UploadFile } from "antd";
+const { Option } = Select;
 
 const categories = ["Одежда", "Электроника", "Косметика", "Обувь", "Дом и сад"];
 const audiences = ["Женщины", "Мужчины", "Дети", "Все"];
 const stylesList = ["Продающий", "Официальный", "Лёгкий", "Эмоциональный"];
 
-const CardForm = () => {
+const CardForm: React.FC = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [fileList, setFileList] = useState<UploadFile[]>([]);

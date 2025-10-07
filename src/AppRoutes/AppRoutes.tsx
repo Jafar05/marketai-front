@@ -9,7 +9,7 @@ import Register from "../pages/Register/Register.tsx";
 import Main from "../pages/Main/Main.tsx";
 import Navbar from "../pages/Navbar/Navbar.tsx";
 
-const AppRoutes = () => {
+const AppRoutes: React.FC = () => {
     return (
             <Routes>
                 <Route path="*" element={<Navbar />}/>
