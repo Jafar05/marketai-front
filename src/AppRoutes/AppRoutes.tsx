@@ -19,14 +19,14 @@ const AppRoutes = () => {
                 <Route path="/register" element={<Register />} />
 
                 {/* Приватные страницы (доступны только после авторизации) */}
-                <Route
-                    path="/dashboard"
-                    element={
-                        <PrivateRoute>
-                            {/*<Dashboard />*/}
-                        </PrivateRoute>
-                    }
-                />
+                {/*<Route*/}
+                {/*    path="/dashboard"*/}
+                {/*    element={*/}
+                {/*        <PrivateRoute>*/}
+                {/*            <Dashboard />*/}
+                {/*        </PrivateRoute>*/}
+                {/*    }*/}
+                {/*/>*/}
                 {/*<Route*/}
                 {/*    path="/history"*/}
                 {/*    element={*/}
