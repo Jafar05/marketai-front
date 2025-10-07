@@ -1,0 +1,26 @@
+.wrapper {
+    min-height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 40px;
+}
+
+.card {
+    max-width: 600px;
+    text-align: center;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    font-size: 48px;
+    color: #1677ff;
+}
+
+.text {
+    font-size: 16px;
+    color: #555;
+}
