@@ -8,6 +8,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsxdev"
   }
 }
