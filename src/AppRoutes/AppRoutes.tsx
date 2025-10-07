@@ -1,10 +1,5 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom";
-// import Login from "../pages/Login.tsx";
-
-// import Dashboard from "../pages/Dashboard.tsx";
-// import History from "../pages/History.tsx";
-import PrivateRoute from "./PrivateRoute.tsx";
 import Register from "../pages/Register/Register.tsx";
 import Main from "../pages/Main/Main.tsx";
 import Navbar from "../pages/Navbar/Navbar.tsx";
