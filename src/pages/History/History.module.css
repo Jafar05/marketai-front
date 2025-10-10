@@ -1,0 +1,45 @@
+/* History.module.css */
+.historyContainer {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.historyTable {
+  margin-top: 16px;
+}
+
+.loadingContainer {
+  padding: 24px;
+  text-align: center;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  margin-bottom: 2px;
+}

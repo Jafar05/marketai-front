@@ -12,20 +12,33 @@ const Main: React.FC = () => {
 
     const [messageApi, contextHolder] = message.useMessage();
 
-
     useEffect(() => {
-        const token = params.get("token")
+        const token = params.get("token");
+        if (!token) return;
+
         fetch(`/api/auth/api/v1/verify-email?token=${token}`)
-            .then(res => res.json())
-            .then(() => messageApi.open({
-                type: 'success',
-                content: "Email успешно подтверждён!",
-            }))
-            .catch(() => messageApi.open({
-                type: 'error',
-                content: "Ошибка при подтверждении email",
-            }));
-    }, [params]);
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Ошибка HTTP ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(() => {
+                messageApi.open({
+                    type: 'success',
+                    content: "Email успешно подтверждён!",
+                });
+                navigate("/", { replace: true });
+            })
+            .catch((err) => {
+                navigate("/", { replace: true });
+                messageApi.open({
+                    type: 'error',
+                    content: "Ошибка при подтверждении email",
+                });
+            });
+    }, [params, navigate, messageApi]);
+
 
 
 

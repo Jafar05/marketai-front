@@ -1,0 +1,49 @@
+/* Dashboard.module.css */
+.dashboardContainer {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboardHeader {
+  margin-bottom: 32px;
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.generateForm {
+  height: fit-content;
+}
+
+.resultCard {
+  height: fit-content;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 40px;
+}
+
+.resultImage {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.tagsContainer {
+  margin-top: 16px;
+}
+
+.tag {
+  margin-bottom: 4px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message, Card, Select } from "antd";
+import { useNavigate } from "react-router-dom";
 import style from "./RegisterForm.module.css";
 import "antd/dist/reset.css";
+import { authApi } from "../../api/api";
+import { useAuthStore } from "../../store/authStore";
 
 interface FormValues {
     fullName: string;
@@ -34,6 +37,8 @@ const RegisterForm: React.FC = () => {
     const [selectedCountry, setSelectedCountry] = useState(countries[0]);
     const [phoneDisplay, setPhoneDisplay] = useState("");
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const { login } = useAuthStore();
 
 
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,30 +60,26 @@ const RegisterForm: React.FC = () => {
         try {
             setLoading(true)
             const phoneToSend = `${selectedCountry.code}${values.phone}`;
-            const response = await fetch("/api/auth/api/v1/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    fullName: values.fullName,
-                    email: values.email,
-                    phoneNumber: phoneToSend,
-                    password: values.password, // отправляем пароль
-                }),
+            
+            const response = await authApi.register({
+                fullName: values.fullName,
+                email: values.email,
+                phoneNumber: phoneToSend,
+                password: values.password,
             });
 
-            if (!response.ok) {
-                const errText = await response.text().catch(() => "");
-                throw new Error(`Ошибка регистрации: ${response.status} ${errText}`);
-            }
+            login(response.token, {
+                id: response.user.id,
+                fullname: response.user.fullname,
+                email: response.user.email,
+            });
 
-            const data = await response.json();
-            console.log("Успешный ответ:", data);
-            message.success("Форма успешно отправлена!");
-            form.resetFields();
-            setPhoneDisplay("");
-        } catch (error) {
+            message.success("Регистрация успешна!");
+            navigate('/dashboard');
+        } catch (error: any) {
             console.error("Ошибка при регистрации:", error);
-            message.error("Не удалось отправить форму. Попробуйте снова.");
+            message.error("Не удалось зарегистрироваться. Попробуйте снова.");
+        } finally {
             setLoading(false)
         }
     };

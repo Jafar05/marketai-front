@@ -1,65 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     CloudOutlined,
     UserOutlined,
     LoginOutlined,
     LogoutOutlined,
     UserAddOutlined,
+    HomeOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Layout, Menu, Button, Space, theme } from "antd";
+import { Layout, Menu, Button, Space, theme, Typography } from "antd";
 import styles from "./Navbar.module.css";
-import CardForm from "../../components/Card/CardForm.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useAuthStore } from "../../store/authStore";
 
 const { Header, Content, Footer, Sider } = Layout;
-
-const navLabel = [
-    { id: 1, label: "Личный кабинет", icon: UserOutlined },
-    { id: 2, label: "История", icon: CloudOutlined },
-];
-
-const items: MenuProps["items"] = navLabel.map((item) => ({
-    key: item.id,
-    icon: React.createElement(item.icon),
-    label: item.label,
-}));
+const { Text } = Typography;
 
 const Navbar: React.FC = () => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { isAuthenticated, user, logout } = useAuthStore();
 
-    // Пока логика входа заглушка (позже будет auth state)
-    const [isAuth, setIsAuth] = useState(false);
+    const navItems = isAuthenticated ? [
+        { id: 1, label: "Главная", icon: HomeOutlined, path: "/dashboard" },
+        { id: 2, label: "История", icon: CloudOutlined, path: "/history" },
+    ] : [];
 
-    const handleLogin = () => {
-        console.log("Register clicked");
-        // потом — открыть модалку/редирект на страницу логина
-    };
+    const items: MenuProps["items"] = navItems.map((item) => ({
+        key: item.id,
+        icon: React.createElement(item.icon),
+        label: item.label,
+        onClick: () => navigate(item.path),
+    }));
 
     const handleLogout = () => {
-        console.log("Logout clicked");
-        setIsAuth(false);
+        logout();
+        navigate('/login');
+    };
+
+    const handleLogin = () => {
+        navigate('/login');
     };
 
     const handleRegister = () => {
-        navigate('/register')
+        navigate('/register');
     };
 
     return (
         <Layout hasSider>
-            <Sider className={styles.sider}>
-                <div className="demo-logo-vertical" />
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={["1"]}
-                    items={items}
-                />
-            </Sider>
+            {isAuthenticated && (
+                <Sider className={styles.sider}>
+                    <div className="demo-logo-vertical" />
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        defaultSelectedKeys={["1"]}
+                        items={items}
+                    />
+                </Sider>
+            )}
 
             <Layout>
                 <Header
@@ -68,38 +71,41 @@ const Navbar: React.FC = () => {
                         background: colorBgContainer,
                     }}
                 >
-                    <Space>
-                        {isAuth ? (
-                            <>
-                                <Button
-                                    type="text"
-                                    icon={<LogoutOutlined />}
-                                    onClick={handleLogout}
-                                    disabled
-                                >
-                                    Выйти
-                                </Button>
-                            </>
-                        ) : (
-                            <>
-                                <Button
-                                    type="text"
-                                    icon={<LoginOutlined />}
-                                    onClick={handleLogin}
-                                    disabled
-                                >
-                                    Войти
-                                </Button>
-                                <Button
-                                    type="text"
-                                    icon={<UserAddOutlined />}
-                                    onClick={handleRegister}
-                                >
-                                    Зарегистрироваться
-                                </Button>
-                            </>
-                        )}
-                    </Space>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        <Text strong>MarketAI</Text>
+                        
+                        <Space>
+                            {isAuthenticated ? (
+                                <>
+                                    <Text>Привет, {user?.fullname}!</Text>
+                                    <Button
+                                        type="text"
+                                        icon={<LogoutOutlined />}
+                                        onClick={handleLogout}
+                                    >
+                                        Выйти
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button
+                                        type="text"
+                                        icon={<LoginOutlined />}
+                                        onClick={handleLogin}
+                                    >
+                                        Войти
+                                    </Button>
+                                    <Button
+                                        type="text"
+                                        icon={<UserAddOutlined />}
+                                        onClick={handleRegister}
+                                    >
+                                        Зарегистрироваться
+                                    </Button>
+                                </>
+                            )}
+                        </Space>
+                    </div>
                 </Header>
 
                 <Content className={styles.contentWrapper}>
@@ -110,12 +116,12 @@ const Navbar: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        <Link to="/"><CardForm /></Link>
+                        <Outlet />
                     </div>
                 </Content>
 
                 <Footer className={styles.footer}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    MarketAI ©{new Date().getFullYear()} - AI-powered marketplace cards
                 </Footer>
             </Layout>
         </Layout>
