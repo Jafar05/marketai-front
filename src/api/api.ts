@@ -99,7 +99,7 @@ export interface CardDetailResponse {
 
 export const cardsApi = {
   generateCard: async (data: GenerateCardRequest, token: string): Promise<GenerateCardResponse> => {
-    const response = await axios.post(`${CARDS_API_BASE_URL}/cards/generate`, data, {
+    const response = await axios.post(`${CARDS_API_BASE_URL}/generate`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -108,7 +108,7 @@ export const cardsApi = {
   },
 
   getCardHistory: async (token: string): Promise<CardHistoryResponse> => {
-    const response = await axios.get(`${CARDS_API_BASE_URL}/cards/history`, {
+    const response = await axios.get(`${CARDS_API_BASE_URL}/history`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -117,7 +117,7 @@ export const cardsApi = {
   },
 
   getCardById: async (id: string, token: string): Promise<CardDetailResponse> => {
-    const response = await axios.get(`${CARDS_API_BASE_URL}/cards/${id}`, {
+    const response = await axios.get(`${CARDS_API_BASE_URL}/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
