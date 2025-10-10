@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Typography, Table, Tag, Image, Button, message, Spin } from 'antd';
 import { EyeOutlined, ReloadOutlined } from '@ant-design/icons';
-import { cardsApi, CardInfo } from '../../api/api';
+import { cardsApi, type CardInfo } from '../../api/api';
 import { useAuthStore } from '../../store/authStore';
 import './History.module.css';
 
@@ -11,7 +11,7 @@ const History: React.FC = () => {
   const [cards, setCards] = useState<CardInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const { token, user } = useAuthStore();
+  const { token } = useAuthStore();
 
   const fetchCards = async () => {
     if (!token) {
@@ -93,7 +93,7 @@ const History: React.FC = () => {
       title: 'Действия',
       key: 'actions',
       width: 100,
-      render: (_, record: CardInfo) => (
+      render: (_: any, record: CardInfo) => (
         <Button
           type="link"
           icon={<EyeOutlined />}

@@ -1,7 +1,6 @@
 import React from "react";
 import {
     CloudOutlined,
-    UserOutlined,
     LoginOutlined,
     LogoutOutlined,
     UserAddOutlined,
@@ -10,7 +9,7 @@ import {
 import type { MenuProps } from "antd";
 import { Layout, Menu, Button, Space, theme, Typography } from "antd";
 import styles from "./Navbar.module.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -22,7 +21,6 @@ const Navbar: React.FC = () => {
     } = theme.useToken();
 
     const navigate = useNavigate();
-    const location = useLocation();
     const { isAuthenticated, user, logout } = useAuthStore();
 
     const navItems = isAuthenticated ? [

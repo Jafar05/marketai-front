@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message, Card, Typography, Upload, Image, Tag, Spin } from 'antd';
+import { Form, Input, Button, message, Card, Typography, Image, Tag, Spin } from 'antd';
 import { UploadOutlined, RobotOutlined } from '@ant-design/icons';
 import { cardsApi } from '../../api/api';
 import { useAuthStore } from '../../store/authStore';

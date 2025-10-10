@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route, Outlet} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import Register from "../pages/Register/Register.tsx";
 import Login from "../pages/Login/Login.tsx";
 import Dashboard from "../pages/Dashboard/Dashboard.tsx";

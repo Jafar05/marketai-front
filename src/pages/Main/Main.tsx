@@ -30,7 +30,7 @@ const Main: React.FC = () => {
                 });
                 navigate("/", { replace: true });
             })
-            .catch((err) => {
+            .catch(() => {
                 navigate("/", { replace: true });
                 messageApi.open({
                     type: 'error',
