@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
     try {
       setLoading(true);
       const response = await cardsApi.generateCard(values, token);
-      
+
       setGeneratedCard(response);
       message.success('Карточка успешно сгенерирована!');
     } catch (error: any) {
@@ -122,11 +122,11 @@ const Dashboard: React.FC = () => {
                   style={{ width: '100%', borderRadius: '8px' }}
                 />
               </div>
-              
+
               <Title level={4}>{generatedCard.title}</Title>
-              
+
               <Paragraph>{generatedCard.description}</Paragraph>
-              
+
               <div style={{ marginTop: '16px' }}>
                 <strong>Теги:</strong>
                 <div style={{ marginTop: '8px' }}>
