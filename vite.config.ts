@@ -5,11 +5,17 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
+      '/api/auth/': {
         target: 'https://marketai-backend-production.up.railway.app',
         changeOrigin: true,
         secure: true,
-        rewrite: (path) => path.replace(/^\/api\//, '/'),
+        rewrite: (path) => path.replace(/^\/api\/auth\//, '/'),
+      },
+      '/api/cards/': {
+        target: 'https://marketai-production.up.railway.app',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api\/cards\//, '/'),
       }
     }
   }
