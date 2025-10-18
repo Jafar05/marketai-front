@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api/auth/auth/api/v1';
-const CARDS_API_BASE_URL = '/api/cards/cards/api/v1';
+const API_BASE_URL = '/api/auth/api/v1';
+const CARDS_API_BASE_URL = '/api/cards/api/v1';
 
 export interface LoginRequest {
   email: string;
