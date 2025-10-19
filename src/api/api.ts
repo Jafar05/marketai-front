@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api/auth/api/v1';
+const API_BASE_URL = '/api/auth/auth/api/v1';
 const CARDS_API_BASE_URL = '/api/cards/cards/api/v1';
 
 export interface LoginRequest {
@@ -99,7 +99,7 @@ export interface CardDetailResponse {
 
 export const cardsApi = {
   generateCard: async (data: GenerateCardRequest, token: string): Promise<GenerateCardResponse> => {
-    const response = await axios.post(`http://localhost:8090/cards/api/v1/generate`, data, {
+    const response = await axios.post(`${CARDS_API_BASE_URL}}/generate`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
